@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+
+<!-- Page Content -->
+<link rel="stylesheet" type="text/css" href="{% static '/styles/post.css' %}">
+
+ <!--Post Content-->
+<div class="post_comment">
+    <div class="post_comment_title">Post Article</div>
+    <div class="row">
+        <div class="col-xl-12">
+            <div class="post_comment_form_container">
+                <form method="POST" class="post-form" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <!--<input type="text" class="comment_text" style="height:55px" placeholder="Article Name" required="required" name="name" id="id_name" >-->
+                    <!--<input type="file"  class="comment_input"  style="height:55px"    name="images" id="id_images" accept="image/*" >-->
+                    <!--<input type="text" class="comment_input"  style="height:88px"  placeholder="Image Caption" required="required" name="img_captions" id="id_img_captions" >-->
+                    <!--<select  class="comment_input comment_input_name" required="required"   style="height:80px"  name="category" id="id_category">-->
+                        <!--<option value selected> Select Category</option>-->
+                        <!--<option value="1">Sports</option>-->
+                        <!--<option value="2">Politics</option>-->
+                        <!--<option value="3">Space</option>-->
+                        <!--<option value="4">Other</option>-->
+                    <!--</select>-->
+                    <!--<input type="text" class="comment_input comment_input_name"   style="height:80px"   placeholder="Add Tags Optional"  name="img_tags" id="id_tags" >-->
+
+                    <!--<textarea class="comment_text" placeholder="Article Description" required="required" name="description" id="id_description"></textarea>-->
+                    <button type="submit" class="comment_button">POST</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

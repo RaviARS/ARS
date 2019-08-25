@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+
+<!-- Page Content -->
+<link rel="stylesheet" type="text/css" href="{% static '/styles/post.css' %}">
+
+    <form method="POST" class="post-form" action="/article-update/{{article.id}}">
+            {% csrf_token %}
+        <div class="container">
+           <div class="form-group row">
+            <label class="col-sm-1 col-form-label"></label>
+            <div class="col-sm-4">
+            <h3>Update Details</h3>
+            </div>
+          </div>
+            <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Id:</label>
+            <div class="col-sm-4">
+                <input type="text" name="id" id="id_id" disabled required maxlength="20" value="{{ article.id }}"/>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label"> Name:</label>
+            <div class="col-sm-4">
+                <input type="text" name="name" id="id_name" required maxlength="100" value="{{ article.user_name }}" />
+            </div>
+          </div>
+            <div class="form-group row">
+            <label class="col-sm-2 col-form-label"> Email:</label>
+            <div class="col-sm-4">
+                <input type="email" name="email" id="id_email" required maxlength="254" value="{{ article.email_id }}" />
+            </div>
+          </div>
+            <div class="form-group row">
+            <label class="col-sm-2 col-form-label"> Contact:</label>
+            <div class="col-sm-4">
+                <input type="text" name="mobile" id="id_mobile"  required maxlength="15" value="{{ article.title }}" />
+            </div>
+          </div>
+            <div class="form-group row">
+            <label class="col-sm-2 col-form-label"> description</label>
+            <div class="col-sm-4">
+                <input type="text" name="description" id="id_description" required maxlength="15" value="{{ article.description }}" />
+            </div>
+          </div>
+            <div class="form-group row">
+            <label class="col-sm-1 col-form-label"></label>
+            <div class="col-sm-4">
+            <button type="submit" class="btn btn-success">Update</button>
+            </div>
+          </div>
+            </div>
+
+    </form>
+
+ <!--Update Article-->
+
+<div class="post_comment">
+    <div class="post_comment_title">Post Article</div>
+    <div class="row">
+        <div class="col-xl-12">
+            <div class="post_comment_form_container">
+                <form method="POST" class="post-form" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <input type="text" class="comment_text" style="height:55px" placeholder="Article Name" required="required" name="name" id="id_name" >
+                    <label class="col-sm-2 col-form-label"> Article Name:</label>
+                    <input type="text" class="comment_text" style="height:35px"  name="name" id="id_name" required="required"  value="{{ article.name }}" />
+
+                    <input type="file"  class="comment_input comment_input_name"  style="height:55px"    name="images" id="id_images" accept="image/*" >
+                    <input type="text" class="comment_input comment_input_name"  style="height:88px"  placeholder="Image Caption" required="required" name="img_captions" id="id_img_captions" >
+
+                    <img src="{{ article.images.url }}" height="50px" width="50px">
+                    <input type="file"   class="comment_text" style="height:55px"    name="images" id="id_images" accept="image/*" >
+
+                    <label class="col-sm-2 col-form-label"> Image Caption:</label>
+                    <input type="text" class="comment_text"  style="height:35px"  required="required" name="img_captions" id="id_img_captions" value="{{ article.img_captions }}" >
+
+                    <select  class="comment_input comment_input_name" required="required"   style="height:80px"  name="category" id="id_category">
+                        <option value selected> Select Category</option>
+                        <option value="1">Sports</option>
+                        <option value="2">Politics</option>
+                        <option value="3">Space</option>
+                        <option value="4">Other</option>
+                    </select>
+                    <input type="text" class="comment_input comment_input_name"   style="height:80px"   placeholder="Add Tags Optional"  name="img_tags" id="id_tags" >
+
+                    <textarea class="comment_text" placeholder="Article Description" required="required" name="description" id="id_description"></textarea>
+                    <button type="submit" class="comment_button">POST</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

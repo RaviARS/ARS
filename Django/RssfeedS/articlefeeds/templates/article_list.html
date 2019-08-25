@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+
+<!-- page content -->
+<link rel="stylesheet" type="text/css" href="{% static '/styles/post.css' %}">
+
+{% for article in articles %}
+
+<div class="row row-lg-eq-height">
+
+    <!-- Post Content -->
+    <div class="col-lg-12">
+        <div class="post_content">
+            <!-- Top Panel -->
+            <div class="post_panel post_panel_top d-flex flex-row align-items-center justify-content-start">
+                <div class="author_image"><div><img src="{% static '/images/user1.jpg' %}" alt="User DP"></div></div>
+                <div class="post_meta">
+                    {% if user.is_authenticated %} {{ user.username.capitalize }}{% else %}visitor{% endif %}
+                    <span> {{ article.date_of_posted }}</span>
+                </div>
+            </div>
+
+            <!-- Post Body -->
+
+            <div class="post_body">
+                <p class="post_p">
+                    {{ article.name }}
+                </p>
+                <figure>
+                      {% if article.images.url %}
+                          <img src="{{ article.images.url }}" >
+                      {% else %}1
+                          <img src="{% static '/images/post_11.jpg' %}" width="340px">
+                      {% endif %}
+                    <figcaption>{{ article.img_captions }}</figcaption>
+                </figure>
+                <p class="post_p">
+                    {{ article.description }}
+                </p>
+                <hr>
+                <p class="post_p" style="float: right;">
+                    <a href="/article-edit/{{ article.id }}"><span class="glyphicon glyphicon-pencil" >Edit</span></a>
+                    <a href="/article-delete/{{ article.id }}">Delete</a>
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+
+
+    {% endfor %}
+{% endblock %}
