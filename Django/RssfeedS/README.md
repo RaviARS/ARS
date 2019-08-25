@@ -18,4 +18,4 @@
 - open browser with link http://127.0.0.1:8000/rss-feeds/
 
 
-* Refere  status.txt file for application development status
+* Refer  status.txt file for application development status
